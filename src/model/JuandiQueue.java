@@ -1,7 +1,5 @@
 package model;
 
-import Exceptions.EmptyJuandiQueueException;
-
 import java.util.EmptyStackException;
 import java.util.Stack;
 
@@ -15,30 +13,31 @@ public class JuandiQueue <T> implements IQueue<T>{
     @Override
     public void enqueue(T element) {
         Stack<T> stackTemp = new Stack<>();
-        for (T s : stack){
+        while (!stack.isEmpty()){
             stackTemp.push(stack.pop());
         }
         stack.push(element);
         for (T s : stackTemp){
-            stack.push(element);
+            stack.push(s);
         }
     }
 
     @Override
     public T dequeue() {
-        return stack.pop();
+        try {
+            return stack.pop();
+        }catch (EmptyStackException e){
+            System.out.println("Empty Queue. Cannot Invoke front()");
+            return null;
+        }
     }
 
     @Override
-    public T front() throws EmptyJuandiQueueException{
+    public T front(){
         try {
-            if(stack==null){
-                throw new EmptyJuandiQueueException();
-            }else {
-                return stack.peek();
-            }
+            return stack.peek();
         }catch (EmptyStackException e){
-            System.out.println("Empty Queue. Cannot Invoke front()");
+            System.out.println("Empty Queue. Cannot Invoke Front()");
             return null;
         }
     }

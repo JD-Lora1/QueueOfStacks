@@ -10,19 +10,13 @@ public class JuandiStack <T> implements IStack<T> {
 
     @Override
     public void push(T element) {
-        Nodo<T> current = head;
+        Nodo<T> current = new Nodo<>();
         if (head==null){
-            head= new Nodo<>(element);
+            head = new Nodo<>(element);
         }else {
-            push(element,head);
-        }
-    }
-
-    private void push(T element, Nodo<T> current){
-        if (current.getNext()==null){
-            current.setNext(new Nodo<>(element));
-        }else {
-            push(element,current.getNext());
+            current.setNext(head);
+            head = current;
+            current.setValue(element);
         }
     }
 
@@ -57,5 +51,10 @@ public class JuandiStack <T> implements IStack<T> {
         }else {
             return false;
         }
+    }
+
+    @Override
+    public void clear(){
+        head = null;
     }
 }

@@ -25,7 +25,9 @@ class JuandiQueueTest <T>{
     public void correctEnqueue(){
         setup1();
         Integer a = 1;
+        Integer b = 2;
         jdQueue.enqueue((T)a);
+        jdQueue.enqueue((T)b);
         assertEquals(1, jdQueue.front());
     }
 
@@ -43,5 +45,11 @@ class JuandiQueueTest <T>{
     public void correctFront(){
         setup2();
         assertEquals(1, jdQueue.front());
+    }
+
+    @Test
+    public void correctIsEmpty(){
+        setup1();
+        assertTrue(jdQueue.isEmpty());
     }
 }
